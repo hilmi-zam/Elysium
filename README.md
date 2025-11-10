@@ -81,7 +81,7 @@ Future<void> getAddressFromLatLng(Position position) async {
 
 ## Screenshot dan Demo
 
-![Tampilan Aplikasi](assets/screenshots/nama_file.jpeg)
+![Tampilan Aplikasi](assets/screenshots/demo.jpeg)
 
 ## Penjelasan Implementasi
 
