@@ -1,7 +1,5 @@
 name: elysium
-description: "A new Flutter project."
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
+description: "Flutter project untuk implementasi Geolocation dan Geocoding dengan fitur tracking lokasi real-time."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
@@ -31,16 +29,17 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
+  # UI Dependencies
+  cupertino_icons: ^1.0.8  # iOS style icons
+
+  # Location Services
+  geolocator: ^14.0.2      # Untuk mendapatkan koordinat GPS dan tracking lokasi
+  geocoding: ^2.1.6        # Untuk konversi koordinat ke alamat
+  google_maps_flutter: ^2.14.0  # Untuk integrasi Google Maps (opsional)
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  geolocator: ^14.0.2
-  geocoding: ^2.1.6
-  google_maps_flutter: ^2.14.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -54,11 +53,15 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
+  # Material Icons font
   uses-material-design: true
+
+  # Assets configuration
+  assets:
+    - assets/screenshots/   # Folder untuk screenshot aplikasi
+    # Tambahkan folder assets lain jika diperlukan
+    # - assets/images/
+    # - assets/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
