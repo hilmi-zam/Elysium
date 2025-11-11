@@ -32,6 +32,11 @@ class _MyHomePageState extends State<MyHomePage> {
   String? _errorMessage;
   StreamSubscription<Position>? _positionStream;
   String? _currentAddress;
+  String? _distanceToPNB;
+
+  // Titik tetap PNB (koordinat referensi)
+  static const double _pnbLatitude = -6.2088;
+  static const double _pnbLongitude = 106.8456;
 
 
   @override
@@ -129,9 +134,19 @@ class _MyHomePageState extends State<MyHomePage> {
           Geolocator.getPositionStream(
             locationSettings: locationSettings,
           ).listen((Position position) async {
+            // Hitung jarak ke titik tetap PNB
+            double distanceInMeters = await Geolocator.distanceBetween(
+              position.latitude,
+              position.longitude,
+              _pnbLatitude,
+              _pnbLongitude,
+            );
+            
             setState(() {
               _currentPosition = position;
               _errorMessage = null;
+              // Format jarak dalam kilometer (2 desimal)
+              _distanceToPNB = '${(distanceInMeters / 1000).toStringAsFixed(2)} km';
             });
             
             await getAddressFromLatLng(position);
@@ -198,6 +213,19 @@ class _MyHomePageState extends State<MyHomePage> {
                               _currentAddress!,
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        if (_distanceToPNB != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12.0),
+                            child: Text(
+                              'Jarak ke PNB: $_distanceToPNB',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.orange,
+                              ),
                             ),
                           ),
                       ],
